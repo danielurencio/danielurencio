@@ -1,0 +1,22 @@
+{
+  "name": "danielurencio",
+  "version": "0.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Daniel Urencio",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "consolidate": "~0.14.0",
+    "express": "~4.13.4",
+    "mongodb": "~2.1.14",
+    "nunjucks": "~2.4.1",
+    "d3": "~3.5.16",
+    "mathjs": "~3.1.4",
+    "sylvester": "0.0.21",
+    "underscore": "~1.8.3"
+  }
+}

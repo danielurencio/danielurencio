@@ -1,0 +1,46 @@
+@font-face {
+    font-family: helveticaneue;
+    src: url("HelveticaNeueLTStd Lt.otf");
+}
+
+@font-face {
+    font-family: lane;
+    src: url("LANENAR_.ttf");
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+div.header {
+    font-family: helveticaneue;
+    color: white;
+    vertical-align: middle;
+    text-align: center;
+    height: 90px;
+    width: 100%;
+    background-color: rgba(102,102,102,1);
+    display:table;
+    vertical-align: middle;
+    font-size: 30px;
+}
+
+div.headercenter {   
+    vertical-align: middle;
+    display: table-cell
+}
+
+div.content {
+    font-family: lane;
+    font-size: 30px;
+    width: 100%;
+    text-align: center;
+    display: table;
+}
+
+div.board {
+    vertical-align: middle;
+    display: table-cell;
+}

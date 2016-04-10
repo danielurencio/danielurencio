@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="/public/css/style.css">
+  <script src="/public/js/d3.js"></script>
+</head>
+
+<body>
+  <div class = "header">
+    <div class="headercenter"> 
+      <span style="color:rgba(204,204,204,0.9)">daniel</span>urencio
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="board">
+      {% for i in content %}
+      <div class={{i}}>{{i}}</div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <script src="/public/js/du.js"></script>
+
+</body>
+</html>

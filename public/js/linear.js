@@ -13,21 +13,22 @@ var svg = d3.select("div.content").append("svg")
 
 d3.json(input, function(err, json) {
 //    if error return console.warn(error);
-    var width = d3.select("svg").style("width");
+    var width = d3.select("svg").style("width"); console.log(width);
     var data = json;
     var padding = 50;
     var xMax = d3.max(data, function(d) { return d.x; });
     var yMax = d3.max(data, function(d) { return d.y; });
-    var domainMax = Math.max(xMax, yMax);
-    var rangeMax = parseFloat(width)/2.5;
+//    var domainMax = Math.max(xMax, yMax);
+    var factor = 2.5;
+    var rangeMax = parseFloat(width)/factor;
     
 
     var xScale = d3.scale.linear()
-		.domain([ 0, domainMax ])
+		.domain([ 0, xMax ])
 		.range([ padding, rangeMax ]);
 
     var yScale = d3.scale.linear()
-		.domain([ 0, domainMax ])
+		.domain([ 0, yMax ])
 		.range([ rangeMax, padding ]);
 
     svg.selectAll("circle")

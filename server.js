@@ -3,7 +3,8 @@ var express = require('express'),
     engines = require('consolidate'),
     MongoClient = require('mongodb').MongoClient,
     assert = require('assert'),
-    read = require('./gd/read.js');
+    read = require('./gd/read.js'),
+    gd = require('./gd/gdCopia.js');
 
 var database = "danielurencio";
 
@@ -60,5 +61,5 @@ app.get('/linear', function(req,res) {
 });
 
 app.get('/ml', function(req,res) {
-    res.json(read.docs);
+    res.json(gd.docs);
 });

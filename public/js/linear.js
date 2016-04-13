@@ -68,8 +68,8 @@ d3.json(input, function(err, json) {
 	})
 	.attr({
 	    "x1": function() { return xScale(0); },
-	    "y1": function() { return yScale(-3.63); },
+	    "y1": function() { return yScale(4.1967); },
 	    "x2": function() { return xScale(24); },
-	    "y2": function() { return yScale(-3.63 + 1.1663*24); }
+	    "y2": function() { return yScale(4.1967 + 1.4559*24); }
 	});
 });

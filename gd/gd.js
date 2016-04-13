@@ -4,22 +4,60 @@ var sylvester = require('sylvester');
 var _ = require('underscore');
 
 var Matrix = sylvester.Matrix;
-//var X = [], Y = [];
 var file = './data.csv';
+var file1 = './gd/data.csv';
 
 
 
-fs.readFile(file, 'utf8', function read(err, data) {
-    var docs = d3.csv.parse(data);
-    var X = [], Y = [];
+var data = fs.readFileSync(file, 'utf8').toString();// Read de csv and save to var.
+var docs = d3.csv.parse(data);// parse csv into an array of objects.
 
-    docs.forEach(function(d) {
-	X.push(parseFloat(d.x));
-	Y.push(parseFloat(d.y));
+
+docs.forEach(function(d) {// Parse each value into float.
+    for(var k in d) {
+	d[k] = +d[k];
+    }
+});
+
+
+module.exports.docs = docs;// Export the array of objects for visualization.
+
+
+function processData(array) {// Create an array of arrays for each key in the obj's.
+    var c = 0;
+    var arr = [];
+
+    for(var i in array[0]) {
+        c++;
+        for(var e=0; e<c; e++) {
+            arr[e] = [];
+        }
+    }
+
+    array.forEach(function(doc) {// Push each object key value into its array.
+        var u = 0;
+
+        for(var i in doc) {
+            arr[u].push(doc[i]);
+            u++;
+        }
+    })
+
+
+    var k = Object.keys(array[0]);// Create a new object with arrays for each feat.
+    var obj = {}; var b = 0;
+    k.forEach(function(d) {
+	obj[d] = Matrix.create(arr[b]);
+	b++;
     });
+    return obj;
+};
 
-    var x = Matrix.create(X);
-    var y = Matrix.create(Y);
+var D = processData(docs);
+
+
+    var x = D.x;  //Matrix.create(D.x);
+    var y = D.y;  //Matrix.create(D.y);
     var m = y.dimensions().rows;
     var ones = Matrix.Zero(m,1).add(1); x = ones.augment(x);
     var n = x.dimensions().cols;
@@ -30,7 +68,6 @@ fs.readFile(file, 'utf8', function read(err, data) {
     computeCost(x, y, theta);
     gradientDescent(x, y, theta, alpha, iterations);
 
-});
 
 
 function computeCost(X, Y, THETA) {

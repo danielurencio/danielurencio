@@ -3,8 +3,8 @@ var express = require('express'),
     engines = require('consolidate'),
     MongoClient = require('mongodb').MongoClient,
     assert = require('assert'),
-    read = require('./gd/read.js'),
-    gd = require('./gd/gdCopia.js');
+//    read = require('./gd/read.js'),
+    gd = require('./gd/gd.js');
 
 var database = "danielurencio";
 

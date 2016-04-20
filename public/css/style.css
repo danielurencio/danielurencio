@@ -8,6 +8,16 @@
     src: url("LANENAR_.ttf");
 }
 
+@font-face {
+    font-family: ahellya;
+    src: url("ahellya.ttf");
+}
+
+@font-face {
+    font-family: ahellyaitalic;
+    src: url("ahellya italic.ttf");
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -15,16 +25,18 @@ html, body {
 }
 
 div.header {
+    bottom: 0;
+    position: fixed;	
     font-family: helveticaneue;
     color: white;
     vertical-align: middle;
     text-align: center;
-    height: 90px;
+    height: 45px;
     width: 100%;
     background-color: rgba(102,102,102,1);
     display:table;
     vertical-align: middle;
-    font-size: 30px;
+    font-size: 18px;
 }
 
 div.headercenter {   

@@ -22,7 +22,7 @@ d3.json(input, function(err, json) {
     var factor = 2.5;
     var rangeMax = parseFloat(width)/factor;
     
-
+console.log(data)
     var xScale = d3.scale.linear()
 		.domain([ 0, xMax ])
 		.range([ padding, rangeMax ]);

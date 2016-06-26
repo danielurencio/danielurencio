@@ -9,6 +9,10 @@ data = load('ex2data1.txt');
 X = data(:, [1,2]);
 y = data(:, 3);
 
+for i=1:size(X)(2)
+  X(:,i) = ( X(:,i) - mean(X(:,i)) ) / std(X(:,i));
+end
+
 [m, n] = size(X);
 X = [ones(m, 1) X];
 initial_theta = zeros(n + 1, 1);
@@ -41,7 +45,6 @@ end
 %--------------------------
 % Cost function & gradient.
 %--------------------------
-
 function [J, grad] = costFunction(theta, X, y)
   m = length(y);
   J = (1/m) * sum( -y.*log(sigmoid(X*theta)) - (1-y).*log(1 - sigmoid(X*theta) ));
@@ -52,7 +55,6 @@ end
 %------------------
 % Gradient Descent.
 %------------------
-
 function [theta] = gradientDescent(alpha, iter, theta, X, y)
   m = length(y);
 

@@ -15,35 +15,19 @@ var date = d3.time.format("%Y");
 
 
 queue()
-    .defer(d3.json, "/final/01.json")
-    .defer(d3.json, "/final/02.json")
-    .defer(d3.json, "/final/03.json")
-    .defer(d3.json, "/final/04.json")
-    .defer(d3.json, "/final/05.json")
-    .defer(d3.json, "/final/06.json")
-    .defer(d3.json, "/final/07.json")
-    .defer(d3.json, "/final/08.json")
-    .defer(d3.json, "/final/09.json")
-    .defer(d3.json, "/final/10.json")
-    .defer(d3.json, "/final/11.json")
-    .defer(d3.json, "/final/12.json")
-    .defer(d3.json, "/final/13.json")
-    .defer(d3.json, "/final/14.json")
-    .defer(d3.json, "/16.json")
-  //  .defer(d3.json, "/ff.json")
-    //.defer(d3.json, "/popgrowVSurban.json")
+   .defer(d3.json, "/final/15.json") //electricity consumption vs co2 percapita
+   .defer(d3.json, "/final/01.json") // co2 percapita
     .await(graph);
 
 
 
 
-function graph(error, D01, D02, D03, D04, D05, D06, D07, D08, D09, D10, D11, D12, D13, D14, e) {
-   var args = [D01,D02,D03,D04,D05,D06,D07,D08,D09,D10,D11,D12,D13,D14];
+function graph(error, data, en) {
   
   if (error) throw error;
 
 	var country = [];
-	D01.forEach(function(d) {   // Filtro de países
+	data.forEach(function(d) {   // Filtro de países
 		if (d.country == "China") {
 		    country.push(d);
 		}
@@ -92,20 +76,17 @@ var sacar = [
 "Alemania"*/
 ];
 
-  //for(var j in args) {
-
-//    if(d != null) {
-	for(var i in sacar) {
-		e = e.filter(function(d) {
+ 	for(var i in sacar) {
+		data = data.filter(function(d) {
 		    return d.country != sacar[i];
 		});
 	}
-//    }	
-//});
-	var unique = d3.nest()
-		.key(function(d) { return d["country"]; })
-		.entries(D01);
 
+ 	for(var i in sacar) {
+		en = en.filter(function(d) {
+		    return d.country != sacar[i];
+		});
+	}
 
 
 // Compute rates of change between each period..
@@ -139,13 +120,6 @@ var feats = [];
    return feats;
 }
 
-var feat = feats(D01)
-var d2 = feats(D02)
-
-	var names = unique.map(function(d) { return d.key; });
-	//console.log(names);
-
-
     var config = {
 //	    "width": width,
 //	    "height": height,
@@ -175,59 +149,34 @@ var d2 = feats(D02)
 	    "text-align": "center",
 	    "padding-top": "20px",
 	    "font-family": "ahellyaitalic",
-	    "font-size": "50px",
+	    "font-size": "30px",
 	    "color": "steelblue"
     };
 
-var themes = [
-"pob", "internet",
-];
-var dd = themes[0];
+    var subtitle = {
+	    "text-align": "center",
+	    "padding-top": "20px",
+	    "font-family": "ahellyaitalic",
+	    "font-size": "18px",
+	    "color": "steelblue"
+    };
+
+
+
     d3.select("body").append("div")
-	.text("Crecimiento poblacional")
+	.text("Consumo de electricidad vs. emisiones de CO2 (per cápita)")
 	.style(title);
 
+
+    scatter(data, "body", config1);
     d3.select("body").append("div")
-	.append("svg").attr("class", "themes")
-	.style({
-//	    "class": "themes",
-	    "height": "27",
-	    "margin": "auto",
-	    "display": "block"
-	})
-	.selectAll("rect").data(themes).enter()
-	.append("rect")
-	.attr({
-	    "x": function(d,i) { return 16.5 * (i); },
-	    "y": 0,
-	    "width": 15,
-	    "height": 15,
-	    "stroke": "steelblue",
-	    "stroke-width": "0.5",
-	    "fill": "transparent",
-	    "fill-opacity": "0.5"
-	})
-	.on("click", function(d) {
-	    if(d=="internet") {
-		d3.select(".content1").remove();
-		ts(D09,"body",config);
-	    }
-	});
+	.text("(promedio)")
+	.style(subtitle);
 
-console.log(feats(D14).length)
-//    ts(D14, "body", config);
-//    enlist( feats(D14),"body");
-    scatter(e, "body", config1);
-//    scatter(D05, "body", config1);
 
-d3.select("body").style("height", "1300px");
+
+    enlist( feats(en),"body");
+
+d3.select("body").style("height", "1350px");
 
 };
-
-/*
-  function type(d) {
-    d.date = formatDate.parse(d.date);
-    d.price = +d.price;
-    return d;
-  }
-*/

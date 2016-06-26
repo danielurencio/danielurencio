@@ -65,11 +65,71 @@ app.get('/ml', function(req,res) {
 
 
 
-app.get('/ts', function(req,res) {
-    res.render("ts")
+app.get('/01', function(req,res) {
+    res.render("01")
+});
+
+app.get('/02', function(req,res) {
+    res.render("02")
+});
+
+app.get('/03', function(req,res) {
+    res.render("03")
+});
+
+app.get('/04', function(req,res) {
+    res.render("04")
+});
+
+app.get('/05', function(req,res) {
+    res.render("05")
+});
+
+app.get('/06', function(req,res) {
+    res.render("06")
+});
+
+app.get('/07', function(req,res) {
+    res.render("07")
+});
+
+app.get('/08', function(req,res) {
+    res.render("08")
+});
+
+app.get('/09', function(req,res) {
+    res.render("09")
+});
+
+app.get('/10', function(req,res) {
+    res.render("10")
+});
+
+app.get('/11', function(req,res) {
+    res.render("11")
+});
+
+app.get('/12', function(req,res) {
+    res.render("12")
+});
+
+app.get('/13', function(req,res) {
+    res.render("13")
+});
+
+app.get('/14', function(req,res) {
+    res.render("14")
+});
+
+app.get('/15', function(req,res) {
+    res.render("15")
+});
+
+app.get('/16', function(req,res) {
+    res.render("16")
 });
 
 app.get('/ts', function(req,res) {
-//    res.json(ts);
+    res.render("ts");
 });
 

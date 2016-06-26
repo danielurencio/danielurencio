@@ -47,3 +47,17 @@ function [J, grad] = costFunction(theta, X, y)
   J = (1/m) * sum( -y.*log(sigmoid(X*theta)) - (1-y).*log(1 - sigmoid(X*theta) ));
   grad = (1/m) .* ( X' * (sigmoid(X*theta) - y) );
 end
+
+
+%------------------
+% Gradient Descent.
+%------------------
+
+function [theta] = gradientDescent(alpha, iter, theta, X, y)
+  m = length(y);
+
+  for i=1:iter
+    theta = theta -  (alpha/m) * (X'*(sigmoid(X*theta) - y));
+  end
+
+end

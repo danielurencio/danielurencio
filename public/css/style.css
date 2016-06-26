@@ -31,12 +31,12 @@ div.header {
     color: white;
     vertical-align: middle;
     text-align: center;
-    height: 45px;
+    height: 42px;
     width: 100%;
     background-color: rgba(102,102,102,1);
     display:table;
     vertical-align: middle;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 div.headercenter {   
@@ -45,7 +45,7 @@ div.headercenter {
 }
 
 div.content {
-    font-family: lane;
+    font-family: helveticaneue;
     font-size: 30px;
     width: 100%;
     text-align: center;

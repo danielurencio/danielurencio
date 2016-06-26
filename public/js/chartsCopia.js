@@ -137,15 +137,13 @@ svg.selectAll("y.axis").transition().call(yAxis);
 			  colorStroke = color(col);
 		}
 		var lines = svg.selectAll(".line")
-			.data(data)
-			  .attr("class","line");
+			.data(data).attr("class","line");
 	
 	//	lines.transition().attr("d",line(d.values))
 	//	  .style("stroke", function(d) { return colorStroke });
 	
 		    svg.append("path")
 			.attr("class", "line")
-			.attr("id", function() { return d.key; })
 			.attr("d", line(d.values))
 			.style("stroke", function(e) {
 			    return colorStroke;
@@ -367,7 +365,7 @@ data.sort(
       "margin": "auto",
       "display": "block",
       "width": 900,
-      "height": 900
+      "height": 600
     })
     .append("g")
     .attr({
@@ -379,7 +377,7 @@ data.sort(
 	.domain(d3.extent(data, function(d) { return d.mean; } ))
 	.range(["steelblue","red"]);
 
-  var c_a = 57, c_b = 300, sp = 14;
+  var c_a = 54, c_b = 235;
 
   svg.selectAll("text").data(data).enter().append("text")
     .attr({
@@ -391,71 +389,20 @@ data.sort(
 
       },
       "y": function(d,i) { //return 11*(i+1);
-	if (i+1 <= c_a) {  return sp * (i+1); }
-	else if (i+1 > c_a && i+1 <= c_a*2) { return sp * (i-c_a+1); }
-	else if (i+1 > c_a*2 && i+1 <= c_a*3) { return sp * (i-c_a*2+1); }
-	else if (i+1 > c_a*3) { return sp * (i-c_a*3+1); }
+	if (i+1 <= c_a) {  return 11 * (i+1); }
+	else if (i+1 > c_a && i+1 <= c_a*2) { return 11 * (i-c_a+1); }
+	else if (i+1 > c_a*2 && i+1 <= c_a*3) { return 11 * (i-c_a*2+1); }
+	else if (i+1 > c_a*3) { return 11 * (i-c_a*3+1); }
 
       },
-      "font-family": "Helvetica",
-      "font-size": "12",
+      "font-family": "helveticaneue",
+      "font-size": "9",
       "fill": function (d) {
 	return colscale(d.mean);
       }
      })
     .text(function(d,i) { 
-      return (i+1)
-	+ ". " + d.country + "  " + "(" + d.mean.toFixed(2) + ")";
-    })
-
-    d3.selectAll("text").on("mouseover", function(d,i) {
-	var X = d3.select(this).attr("x");
-	var x = d3.select(this).node().getBBox().width;
-	var suma = X + x;
-	var y = d3.select(this).attr("y");
-
-	svg.append("text")
-	.attr({
-	  "x": function() { return Number(X) + Number(x) ; },
-	  "y": function() { return y; },
-	  "font-size": "9",
-	  "class": "tip"
-	}).text(" "+ d.min + "-" + d.max) })
-	.on("mouseout", function(d) {
-	    d3.selectAll("text.tip").remove();
-	})
-	.on("click", function(d) {
-	   var country = d3.select(this).datum().country; console.log(country);
-	   var p = "path#" + country;
-	   d3.selectAll("path").style({
-		"stroke-opacity": "0.45",
-		"stroke-width": "0.8"
-	   });
-	   d3.select(p).style({
-		"stroke": "black",
-		"stroke-opacity": "1",
-		"stroke-width": "2.5"
-	    })
-
-	var dat=d3.select(p).datum().values;
-	var datum = dat.map(function(d) { return d.value; });
-	var val = datum[0];
-
-	var hold = data.map(function(d) {return d.mean});
-	var placer = d3.extent(hold);
-	var scale = d3.scale.linear()
-		.range([height, 0])
-		.domain([placer[0], placer[1]]); console.log(placer)
-
-
-	   d3.select("svg.content1").append("text")
-		.attr({
-		  "x": "120",
-		  "y": String(scale(val)+20),
-		  "font-family": "Times New Roman",
-		  "font-size": "22"
-		}).text(country);
-	});
-    
+      return (i+1) + ". " + d.country + "  " + "(" + d.mean.toFixed(2) + ")";
+    });
 
 };

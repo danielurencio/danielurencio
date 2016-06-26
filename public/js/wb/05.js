@@ -15,35 +15,18 @@ var date = d3.time.format("%Y");
 
 
 queue()
-    .defer(d3.json, "/final/01.json")
-    .defer(d3.json, "/final/02.json")
-    .defer(d3.json, "/final/03.json")
-    .defer(d3.json, "/final/04.json")
-    .defer(d3.json, "/final/05.json")
-    .defer(d3.json, "/final/06.json")
-    .defer(d3.json, "/final/07.json")
-    .defer(d3.json, "/final/08.json")
-    .defer(d3.json, "/final/09.json")
-    .defer(d3.json, "/final/10.json")
-    .defer(d3.json, "/final/11.json")
-    .defer(d3.json, "/final/12.json")
-    .defer(d3.json, "/final/13.json")
-    .defer(d3.json, "/final/14.json")
-    .defer(d3.json, "/16.json")
-  //  .defer(d3.json, "/ff.json")
-    //.defer(d3.json, "/popgrowVSurban.json")
+   .defer(d3.json, "/final/05.json")
     .await(graph);
 
 
 
 
-function graph(error, D01, D02, D03, D04, D05, D06, D07, D08, D09, D10, D11, D12, D13, D14, e) {
-   var args = [D01,D02,D03,D04,D05,D06,D07,D08,D09,D10,D11,D12,D13,D14];
+function graph(error, D05) {
   
   if (error) throw error;
 
 	var country = [];
-	D01.forEach(function(d) {   // Filtro de países
+	D05.forEach(function(d) {   // Filtro de países
 		if (d.country == "China") {
 		    country.push(d);
 		}
@@ -92,21 +75,11 @@ var sacar = [
 "Alemania"*/
 ];
 
-  //for(var j in args) {
-
-//    if(d != null) {
-	for(var i in sacar) {
-		e = e.filter(function(d) {
+ 	for(var i in sacar) {
+		D05 = D05.filter(function(d) {
 		    return d.country != sacar[i];
 		});
 	}
-//    }	
-//});
-	var unique = d3.nest()
-		.key(function(d) { return d["country"]; })
-		.entries(D01);
-
-
 
 // Compute rates of change between each period..
 function rates(obj) {
@@ -139,13 +112,6 @@ var feats = [];
    return feats;
 }
 
-var feat = feats(D01)
-var d2 = feats(D02)
-
-	var names = unique.map(function(d) { return d.key; });
-	//console.log(names);
-
-
     var config = {
 //	    "width": width,
 //	    "height": height,
@@ -167,7 +133,7 @@ var d2 = feats(D02)
 	    "xdisplay": "none",
 	    "ydisplay": "none",
 	    "dateformat": "%Y",
-	    "xlog": true
+	   // "xlog": true
     };
 
 
@@ -179,55 +145,13 @@ var d2 = feats(D02)
 	    "color": "steelblue"
     };
 
-var themes = [
-"pob", "internet",
-];
-var dd = themes[0];
     d3.select("body").append("div")
-	.text("Crecimiento poblacional")
+	.text("Metano por agricultura")
 	.style(title);
 
-    d3.select("body").append("div")
-	.append("svg").attr("class", "themes")
-	.style({
-//	    "class": "themes",
-	    "height": "27",
-	    "margin": "auto",
-	    "display": "block"
-	})
-	.selectAll("rect").data(themes).enter()
-	.append("rect")
-	.attr({
-	    "x": function(d,i) { return 16.5 * (i); },
-	    "y": 0,
-	    "width": 15,
-	    "height": 15,
-	    "stroke": "steelblue",
-	    "stroke-width": "0.5",
-	    "fill": "transparent",
-	    "fill-opacity": "0.5"
-	})
-	.on("click", function(d) {
-	    if(d=="internet") {
-		d3.select(".content1").remove();
-		ts(D09,"body",config);
-	    }
-	});
-
-console.log(feats(D14).length)
-//    ts(D14, "body", config);
-//    enlist( feats(D14),"body");
-    scatter(e, "body", config1);
-//    scatter(D05, "body", config1);
+        ts(D05, "body", config);
+    enlist( feats(D05),"body");
 
 d3.select("body").style("height", "1300px");
 
 };
-
-/*
-  function type(d) {
-    d.date = formatDate.parse(d.date);
-    d.price = +d.price;
-    return d;
-  }
-*/

@@ -451,9 +451,9 @@ data.sort(
 	   d3.select("svg.content1").append("text")
 		.attr({
 		  "x": "120",
-		  "y": String(scale(val)+20),
+		  "y": String(scale(val) + 30),
 		  "font-family": "Times New Roman",
-		  "font-size": "22"
+		  "font-size": "18"
 		}).text(country);
 	});
     

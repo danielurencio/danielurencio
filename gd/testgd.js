@@ -5,11 +5,11 @@ var under = require('underscore');
 
 var Matrix = sylvester.Matrix;
 var file = './a.csv';
-var file1 = './gd/data.csv';
+var file1 = './data.csv';
 
 
 
-var data = fs.readFileSync(file1, 'utf8').toString();// Read de csv and save to var
+var data = fs.readFileSync(file, 'utf8').toString();// Read de csv and save to var
 var docs = d3.csv.parse(data);// parse csv into an array of objects.
 
 
